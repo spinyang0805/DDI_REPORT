@@ -3,496 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>織智平台 畫面草稿</title>
+<title>AI 方案總覽</title>
 <style>
-:root{
-  --navy:#1F3A5F; --navy-2:#2C4F7C; --navy-soft:#E8EEF6;
-  --red:#C0392B; --red-soft:#FBE9E7; --amber:#D9822B; --amber-soft:#FFF3E0;
-  --green:#2E7D32; --green-soft:#E8F5E9;
-  --bg:#F3F5F8; --card:#FFFFFF; --line:#DDE3EA; --text:#1F2933; --muted:#62707F;
-}
+:root{--navy:#1F3A5F;--red:#C0392B;--line:#DDE3EA;--muted:#62707F;--bg:#F3F5F8;--text:#1F2933}
 *{box-sizing:border-box}
-html,body{margin:0}
-body{background:#C9D1DB;font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;color:var(--text);font-size:15px;line-height:1.55}
-.toolbar{position:sticky;top:0;z-index:50;background:#26323F;color:#fff;display:flex;gap:8px;align-items:center;padding:8px 16px;font-size:14px;flex-wrap:wrap}
-.toolbar b{margin-right:8px}
-.toolbar button{background:#3B4A5A;color:#fff;border:0;border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
-.toolbar button.on{background:var(--red)}
-.toolbar .sp{flex:1}
-body.shot .toolbar{display:none}
-
-.app{width:1440px;height:880px;margin:16px auto;background:var(--bg);display:grid;grid-template-columns:240px 1fr;grid-template-rows:60px 1fr;box-shadow:0 6px 24px rgba(0,0,0,.18);position:relative;overflow:hidden}
-body.shot .app{margin:0;box-shadow:none}
-.side{grid-row:1/3;background:var(--navy);color:#DCE6F2;padding:18px 14px;display:flex;flex-direction:column;gap:4px}
-.logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:20px;margin:0 6px 22px}
-.logo i{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#E07A5F,#C0392B);display:grid;place-items:center;font-style:normal;font-size:18px}
-.nav{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:8px;cursor:pointer;font-size:15.5px}
-.nav:hover{background:rgba(255,255,255,.08)}
-.nav.on{background:#fff;color:var(--navy);font-weight:700}
-.nav .ic{width:22px;text-align:center}
-.nav .cnt{margin-left:auto;background:var(--red);color:#fff;border-radius:10px;font-size:12px;padding:0 7px}
-.side .foot{margin-top:auto;font-size:12.5px;color:#9FB2C8;padding:0 8px}
-.top{background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 24px}
-.top .search{flex:1;max-width:560px;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:8px 16px;color:var(--muted)}
-.top .sp{flex:1}
-.pill{border:1px solid var(--line);border-radius:16px;padding:4px 12px;font-size:13.5px;background:#fff}
-.user{display:flex;align-items:center;gap:8px;font-size:14px}
-.avatar{width:34px;height:34px;border-radius:50%;background:#7A9CC6;color:#fff;display:grid;place-items:center;font-weight:700}
-.demo-tag{position:absolute;right:16px;bottom:12px;background:rgba(192,57,43,.9);color:#fff;font-size:12px;padding:3px 10px;border-radius:4px;z-index:5}
-
-.main{padding:20px 24px;overflow:hidden;position:relative}
-.screen{display:none;height:100%}
-.screen.on{display:block}
-h1{font-size:22px;margin:0 0 4px}
-.sub{color:var(--muted);font-size:14px;margin-bottom:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
-.card h3{margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:8px}
-.muted{color:var(--muted)}
-.small{font-size:13px}
-.btn{display:inline-block;border-radius:8px;padding:8px 16px;font-size:14px;border:1px solid var(--line);background:#fff;cursor:pointer}
-.btn.pri{background:var(--navy);border-color:var(--navy);color:#fff}
-.btn.red{background:var(--red);border-color:var(--red);color:#fff}
-.tag{display:inline-block;border-radius:4px;padding:1px 8px;font-size:12.5px;background:var(--navy-soft);color:var(--navy);margin:0 4px 4px 0}
-.tag.red{background:var(--red-soft);color:var(--red)} .tag.amber{background:var(--amber-soft);color:var(--amber)} .tag.green{background:var(--green-soft);color:var(--green)}
-.row{display:flex;gap:16px}
-table{border-collapse:collapse;width:100%;font-size:14px}
-th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left}
-th{background:#F7F9FB;color:var(--muted);font-weight:600}
-
-/* annotations */
-.anno{position:absolute;z-index:20;width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;font-weight:700;display:grid;place-items:center;font-size:16px;box-shadow:0 0 0 3px #fff,0 2px 6px rgba(0,0,0,.3)}
-body.noanno .anno{display:none}
-
-/* home */
-.hero{background:linear-gradient(120deg,var(--navy),var(--navy-2));color:#fff;border-radius:14px;padding:22px 26px}
-.hero h1{color:#fff;font-size:24px}
-.askbox{margin-top:14px;background:#fff;border-radius:10px;padding:12px 16px;color:var(--muted);display:flex;align-items:center;gap:10px;font-size:16px}
-.askbox .go{margin-left:auto;background:var(--red);color:#fff;border-radius:8px;padding:6px 16px;font-size:14px}
-.chips{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
-.chips span{background:rgba(255,255,255,.15);border-radius:14px;padding:4px 12px;font-size:13.5px}
-.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px}
-.mod{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px;cursor:pointer}
-.mod .ic{font-size:30px}
-.mod h3{margin:6px 0 4px;font-size:18px}
-.mod .num{font-size:13.5px;margin-top:10px;color:var(--navy);font-weight:700}
-
-/* chat */
-.chat-grid{display:grid;grid-template-columns:230px 1fr 330px;gap:16px;height:100%}
-.hist .item{padding:9px 10px;border-radius:8px;font-size:14px;margin-bottom:4px}
-.hist .item.on{background:var(--navy-soft);color:var(--navy);font-weight:700}
-.filter{font-size:13.5px;margin-bottom:10px}
-.filter label{display:block;color:var(--muted);font-size:12.5px;margin-top:8px}
-.filter .sel{border:1px solid var(--line);border-radius:6px;padding:5px 9px;background:#fff}
-.chat{display:flex;flex-direction:column;gap:12px;overflow:hidden}
-.msg-q{align-self:flex-end;background:var(--navy);color:#fff;border-radius:14px 14px 2px 14px;padding:10px 14px;max-width:80%}
-.msg-a{background:#fff;border:1px solid var(--line);border-radius:2px 14px 14px 14px;padding:14px 16px;font-size:14.5px}
-.msg-a h4{margin:8px 0 4px;font-size:14.5px;color:var(--navy)}
-.msg-a ol,.msg-a ul{margin:0;padding-left:20px}
-.src{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.src span{border:1px solid #B8C7DA;background:var(--navy-soft);color:var(--navy);border-radius:6px;padding:3px 9px;font-size:13px}
-.fb{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:13.5px}
-.fb .btn{padding:4px 12px;font-size:13px}
-.inputbar{margin-top:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--muted);display:flex;gap:10px;align-items:center}
-.inputbar .go{margin-left:auto;background:var(--navy);color:#fff;border-radius:8px;padding:5px 14px}
-.notfound{background:var(--amber-soft);border:1px solid #F0C08A;border-radius:2px 14px 14px 14px;padding:12px 16px;font-size:14px}
-.doc-prev{font-size:13.5px}
-.doc-prev .hl{background:#FFF2A8}
-.doc-prev .meta{font-size:12.5px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:8px}
-
-/* capture */
-.steps{display:flex;gap:0;margin-bottom:14px}
-.step{flex:1;text-align:center;font-size:14px;color:var(--muted);position:relative;padding-top:34px}
-.step::before{content:attr(data-n);position:absolute;top:0;left:50%;transform:translateX(-50%);width:28px;height:28px;border-radius:50%;background:#C9D3DE;color:#fff;display:grid;place-items:center;font-weight:700;z-index:2}
-.step::after{content:"";position:absolute;top:13px;left:-50%;width:100%;height:3px;background:#C9D3DE;z-index:1}
-.step:first-child::after{display:none}
-.step.done::before,.step.done::after{background:var(--green)}
-.step.now::before{background:var(--red)} .step.now::after{background:var(--green)}
-.step.now{color:var(--red);font-weight:700}
-.cap-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:16px}
-.audio{display:flex;align-items:center;gap:10px;background:var(--bg);border-radius:8px;padding:8px 12px;margin:10px 0}
-.audio .bar{flex:1;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--navy) 38%,#C9D3DE 38%)}
-.ts{font-size:14px;max-height:380px;overflow:hidden}
-.ts p{margin:0 0 8px}
-.ts .t{color:var(--navy);font-weight:700;font-size:12.5px;margin-right:6px}
-.ts .hl{background:#FFF2A8}
-.field{margin-bottom:9px}
-.field label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:2px}
-.field .box{border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:14px;background:#FCFDFE}
-.field .box ol{margin:0;padding-left:20px}
-.link-ts{font-size:12px;color:var(--navy);margin-left:6px}
-
-/* radar */
-.files{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
-.file{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:13.5px}
-.file .nm{font-weight:700;font-size:14px;word-break:break-all}
-.file.sel{border:2px solid var(--navy)}
-.drop{border:2px dashed #AAB7C6;border-radius:10px;display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:12px}
-.conf{display:inline-block;width:70px;height:8px;border-radius:4px;background:#E3E8EE;vertical-align:middle;margin-right:6px;position:relative;overflow:hidden}
-.conf i{position:absolute;left:0;top:0;bottom:0;background:var(--green)}
-.conf.low i{background:var(--amber)}
-.selbox{border:1px solid var(--line);border-radius:6px;padding:3px 9px;background:#fff;display:inline-block;min-width:120px}
-.selbox.warn{border-color:var(--amber);background:var(--amber-soft)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
-.kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 16px}
-.kpi .v{font-size:26px;font-weight:700;color:var(--navy)}
-.kpi .v.red{color:var(--red)}
-.kpi .l{font-size:13px;color:var(--muted)}
-.heat{display:grid;grid-template-columns:120px repeat(12,1fr);gap:3px;font-size:12.5px}
-.heat div{padding:6px 2px;text-align:center;border-radius:3px}
-.heat .h{background:none;color:var(--muted);font-weight:600}
-.heat .rh{text-align:left;padding-left:4px;font-weight:600;background:none}
-.c-g{background:#CDE8CF}.c-y{background:#FCE3B4}.c-r{background:#F4B4AA;color:#7A1F14;font-weight:700}.c-l{background:#DCE6F2}
-.legend{font-size:12.5px;color:var(--muted);margin-top:8px;display:flex;gap:14px}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:4px;vertical-align:-1px}
-.alert-sum{font-size:14px}
-.alert-sum .it{border-left:4px solid var(--red);background:var(--red-soft);padding:7px 10px;margin-bottom:8px;border-radius:0 6px 6px 0}
-.alert-sum .it.am{border-color:var(--amber);background:var(--amber-soft)}
-.todo{font-size:13.5px}
-.todo div{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px dashed var(--line)}
-.todo .ck{width:16px;height:16px;border:2px solid #9AA5B1;border-radius:3px;flex:none;margin-top:3px}
-
-/* kpi screen */
-.kgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:16px}
-.kc{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.kc .v{font-size:28px;font-weight:700;color:var(--navy)}
-.kc .l{font-size:13px;color:var(--muted)}
-.kc .t{font-size:12.5px;margin-top:4px}
-.ok{color:var(--green);font-weight:700}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"Microsoft JhengHei","PingFang TC","Noto Sans TC",sans-serif;line-height:1.6}
+header{background:var(--navy);color:#fff;padding:32px 16px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+h1{margin:0 0 6px;font-size:28px}
+header p{margin:0;opacity:.85}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:24px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column}
+.tag{display:inline-block;background:var(--navy);color:#fff;border-radius:6px;padding:2px 10px;font-size:13px;font-weight:700}
+.card.rec .tag{background:var(--red)}
+.card h2{margin:10px 0 2px;font-size:21px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:10px}
+.ev{background:var(--bg);border-radius:8px;padding:10px 12px;font-size:14px;margin:6px 0 12px}
+.ev b{color:var(--navy);font-size:20px}
+ul{margin:0 0 14px;padding-left:20px;font-size:14.5px}
+.go{margin-top:auto;display:block;text-align:center;background:var(--navy);color:#fff;border-radius:8px;padding:10px;text-decoration:none;font-weight:700}
+.go:hover{opacity:.9}
+.note{font-size:13px;color:var(--muted);padding-bottom:32px}
 </style>
 </head>
 <body>
-<div class="toolbar">
-  <b>織智平台・畫面草稿</b>
-  <button data-go="home">① 首頁</button>
-  <button data-go="ask">② 問師傅</button>
-  <button data-go="capture">③ 收經驗</button>
-  <button data-go="upload">④ 產銷雷達：上傳</button>
-  <button data-go="radar">⑤ 產銷雷達：看板</button>
-  <button data-go="kpi">⑥ 成效看板</button>
-  <span class="sp"></span>
-  <button id="annoBtn" class="on">說明標記：開</button>
-</div>
-
-<div class="app">
-  <aside class="side">
-    <div class="logo"><i>織</i>織智平台</div>
-    <div class="nav" data-go="home"><span class="ic">⌂</span>首頁</div>
-    <div class="nav" data-go="ask"><span class="ic">💬</span>問師傅</div>
-    <div class="nav" data-go="capture"><span class="ic">🎙</span>收經驗<span class="cnt">3</span></div>
-    <div class="nav" data-go="upload"><span class="ic">📤</span>產銷雷達・上傳</div>
-    <div class="nav" data-go="radar"><span class="ic">📡</span>產銷雷達・看板<span class="cnt">2</span></div>
-    <div class="nav" data-go="kpi"><span class="ic">📈</span>成效看板</div>
-    <div class="foot">試點版 v0.3<br>畫面為示意，資料皆為虛構</div>
-  </aside>
-  <header class="top">
-    <div class="search">🔍 搜尋知識、案例、訂單…</div>
-    <span class="sp"></span>
-    <span class="pill">🌐 繁體中文 ▾</span>
-    <span class="pill">台灣織染 A 廠</span>
-    <div class="user"><div class="avatar">陳</div>陳○○・技術課</div>
-  </header>
-
-  <main class="main">
-  <!-- ============ HOME ============ -->
-  <section class="screen" id="s-home">
-    <div class="hero">
-      <h1>早安，陳○○ 👋</h1>
-      <div style="opacity:.85">2026/10/05（一）・今天有 1 則產銷預警、3 則待審核經驗</div>
-      <div class="askbox">💬 有問題問師傅，例如：「深色尼龍布出現斑點怎麼處理？」<span class="go">提問</span></div>
-      <div class="chips"><span>換缸清洗要點</span><span>品牌 X 色牢度要求</span><span>定型機溫度異常</span><span>Cách xử lý vết đốm?（越文也可以）</span></div>
+<header><div class="wrap">
+  <h1>AI 行動學習：四個方案方向</h1>
+  <p>第三組（紡織總部）｜依 82 位主管問卷加權分析提出｜點選各方案查看畫面草稿</p>
+</div></header>
+<main class="wrap">
+  <div class="grid">
+    <div class="card rec">
+      <span class="tag">方案 A｜建議主軸</span>
+      <h2>織智平台</h2>
+      <div class="sub">經驗不流失、產能不失衡</div>
+      <div class="ev">對應加權第 <b>1、2</b> 名痛點<br>人才傳承 137 分・高低峰差 102.5 分</div>
+      <ul><li>問師傅：查得到過去的經驗</li><li>收經驗：師傅說、AI 整理</li><li>產銷雷達：提前 12 週看見高低峰</li></ul>
+      <a class="go" href="option_a.html">看畫面草稿 →</a>
     </div>
-    <div class="mods">
-      <div class="mod" data-go="ask"><div class="ic">💬</div><h3>問師傅</h3><div class="muted small">查 SOP、異常案例、打樣紀錄，回答一定附上來源</div><div class="num">已收錄 1,284 份文件・212 條經驗</div></div>
-      <div class="mod" data-go="capture"><div class="ic">🎙</div><h3>收經驗</h3><div class="muted small">錄下師傅的經驗，AI 整理成條目，師傅確認後入庫</div><div class="num">本月新增 26 條・待審核 3 條</div></div>
-      <div class="mod" data-go="radar"><div class="ic">📡</div><h3>產銷雷達</h3><div class="muted small">各方 Excel 自動整理，提前 12 週看見高低峰</div><div class="num" style="color:var(--red)">第 45～47 週負荷 118%</div></div>
+    <div class="card">
+      <span class="tag">方案 B</span>
+      <h2>一單到底</h2>
+      <div class="sub">從紗到出貨，訂單全程透明</div>
+      <div class="ev">對應加權第 <b>3、4</b> 名痛點<br><b>61%</b> 的 AI 期待提到進度、庫存、交期</div>
+      <ul><li>訂單全景：一條線看完各段進度</li><li>接單即時承諾：當下回覆可交量</li><li>跨產區進度看板</li></ul>
+      <a class="go" href="option_b.html">看畫面草稿 →</a>
     </div>
-    <div class="row" style="margin-top:16px">
-      <div class="card" style="flex:1.2">
-        <h3>📡 本週產銷預警</h3>
-        <div class="alert-sum">
-          <div class="it">越南 A 廠｜品牌 X：第 45～47 週負荷 <b>118%</b>，車縫產能缺口 15%</div>
-          <div class="it am">織染 B 廠布料：3 張 PO 預計晚到 1 週，影響 6 款</div>
-        </div>
-        <span class="btn" data-go="radar">查看看板 →</span>
-      </div>
-      <div class="card" style="flex:1">
-        <h3>🎙 待我審核的經驗</h3>
-        <table><tr><td>換缸清洗要點（黃○○）</td><td><span class="tag amber">待審核</span></td></tr>
-        <tr><td>尼龍深色均染技巧（李○○）</td><td><span class="tag amber">待審核</span></td></tr>
-        <tr><td>定型機張力設定（張○○）</td><td><span class="tag amber">待審核</span></td></tr></table>
-      </div>
-      <div class="card" style="flex:1">
-        <h3>🔥 大家最近在問</h3>
-        <table><tr><td>深色尼龍斑點處理</td><td class="muted small">42 次</td></tr>
-        <tr><td>品牌 X 色牢度標準</td><td class="muted small">31 次</td></tr>
-        <tr><td>助劑替代品清單</td><td class="muted small">18 次</td></tr></table>
-      </div>
+    <div class="card">
+      <span class="tag">方案 C</span>
+      <h2>打樣快手</h2>
+      <div class="sub">AI 開發與製單助手</div>
+      <div class="ev">對應打樣頻繁、小單快返<br><b>37%</b> 的 AI 期待提到打樣、開發、製單</div>
+      <ul><li>Tech Pack 自動轉製單初稿</li><li>相似款與成功參數推薦</li><li>打樣排程與命中率</li></ul>
+      <a class="go" href="option_c.html">看畫面草稿 →</a>
     </div>
-    <div class="anno" style="left:560px;top:118px">1</div>
-    <div class="anno" style="left:170px;top:262px">2</div>
-    <div class="anno" style="left:190px;top:458px">3</div>
-    <div class="anno" style="left:625px;top:458px">4</div>
-  </section>
-
-  <!-- ============ ASK ============ -->
-  <section class="screen" id="s-ask">
-    <div class="chat-grid">
-      <div class="card hist">
-        <div class="filter">
-          <b>查詢範圍</b>
-          <label>事業</label><span class="sel">織布染整 ▾</span>
-          <label>廠區</label><span class="sel">台灣 A 廠 ▾</span>
-          <label>回答語言</label><span class="sel">繁體中文 ▾</span>
-        </div>
-        <b style="font-size:14px">我的提問紀錄</b>
-        <div class="item on">深色尼龍布斑點處理</div>
-        <div class="item">品牌 Y 防潑水要求</div>
-        <div class="item">定型機溫度異常</div>
-        <div class="item">換缸清洗步驟</div>
-        <div class="item">PU 塗佈剝離強度</div>
-      </div>
-      <div class="chat">
-        <div class="msg-q">深色尼龍布染色後出現斑點，過去怎麼處理？</div>
-        <div class="msg-a">
-          找到 <b>3 件相似案例</b>，整理如下：
-          <h4>可能原因</h4>
-          <ol><li>前處理不完全，油劑或漿料殘留</li><li>染料溶解不完全或凝聚</li><li>升溫過快，造成上染不均</li></ol>
-          <h4>處置步驟</h4>
-          <ol><li>先取樣確認斑點位置：布面普遍 → 查前處理；局部 → 查染料溶解</li><li>重新精練後回修，並加強溶解與過濾</li><li>調整升溫曲線（案例 #2025-032 降為每分鐘 1℃ 後改善）</li></ol>
-          <h4>注意事項</h4>
-          <ul><li>品牌 X 的深色款，回修前需先通知業務確認</li></ul>
-          <div class="src"><span>📄 異常報告 #2024-117</span><span>📄 異常報告 #2025-032</span><span>📘 染色 SOP 第 4.2 節（2025/06 更新）</span></div>
-          <div class="fb"><span class="muted">對應負責人：染色課 李○○</span><span style="flex:1"></span><span class="btn">👍 有用</span><span class="btn">👎 不準</span><span class="btn">轉問專家</span></div>
-        </div>
-        <div class="msg-q">品牌 Y 今年新款的防潑水等級要求是多少？</div>
-        <div class="notfound">⚠️ <b>知識庫中找不到可靠資料</b>，不提供推測答案。<br>建議詢問：業務二課 林○○（品牌 Y 窗口）。此問題已記錄為「知識缺口」，會通知知識管理員補充。</div>
-        <div class="inputbar">輸入問題，可用中文、English、Tiếng Việt…<span class="go">送出</span></div>
-      </div>
-      <div class="card doc-prev">
-        <h3>📄 來源預覽</h3>
-        <div class="meta">異常報告 #2025-032｜染色課｜2025/03/14<br>產品：尼龍 70D 平織，深藍色</div>
-        <p><b>現象：</b>染色後布面出現深色小點，約每米 5～8 點。</p>
-        <p><b>原因分析：</b>升溫段每分鐘 2.5℃，<span class="hl">染料在 60～80℃ 區間快速上染，造成局部凝聚</span>。</p>
-        <p><b>對策：</b><span class="hl">升溫改為每分鐘 1℃</span>，並在 70℃ 保溫 10 分鐘；回修 2 缸後合格。</p>
-        <p class="muted small">審核人：李○○｜被引用 18 次</p>
-        <span class="btn">開啟完整文件</span>
-      </div>
+    <div class="card">
+      <span class="tag">方案 D</span>
+      <h2>主管 AI 工坊</h2>
+      <div class="sub">小題大作：主管帶頭，文化落地</div>
+      <div class="ev">對應 9/16 會議原命題<br><b>32%</b> 的 AI 期待提到減少人工、表單、報表</div>
+      <ul><li>知道／會用／親自做 三種深度</li><li>提案卡到原型，上線前資安檢核</li><li>案例牆，一鍵複製到其他廠</li></ul>
+      <a class="go" href="option_d.html">看畫面草稿 →</a>
     </div>
-    <div class="anno" style="left:120px;top:4px">1</div>
-    <div class="anno" style="left:262px;top:46px">2</div>
-    <div class="anno" style="left:262px;top:368px">3</div>
-    <div class="anno" style="left:780px;top:432px">4</div>
-    <div class="anno" style="left:262px;top:520px">5</div>
-    <div class="anno" style="left:1068px;top:4px">6</div>
-  </section>
-
-  <!-- ============ CAPTURE ============ -->
-  <section class="screen" id="s-capture">
-    <h1>收經驗：換缸清洗要點</h1>
-    <div class="sub">受訪：黃○○（染色課資深技師，年資 32 年）｜訪談：知識管理員 吳○○｜2026/10/02</div>
-    <div class="steps">
-      <div class="step done" data-n="✓">錄音上傳</div><div class="step done" data-n="✓">自動轉文字</div><div class="step done" data-n="✓">AI 整理條目</div><div class="step now" data-n="4">師傅審核</div><div class="step" data-n="5">入庫可查詢</div>
-    </div>
-    <div class="cap-grid">
-      <div class="card">
-        <h3>🎙 訪談逐字稿</h3>
-        <div class="audio">▶<div class="bar"></div><span class="small muted">10:52 / 28:41</span></div>
-        <div class="ts">
-          <p><span class="t">03:12</span>換缸最怕的就是前一缸是深色，下一缸是淺色，那個殘留一點點就整缸報廢。</p>
-          <p><span class="t">05:40</span><span class="hl">我們的做法是深轉淺一定要跑兩次清缸，第一次用鹼劑加溫到 90 度跑 20 分鐘</span>，第二次清水。</p>
-          <p><span class="t">08:05</span>新人常常忘記看過濾網，那邊藏最多，<span class="hl">每次清缸都要拆過濾網沖</span>。</p>
-          <p><span class="t">10:52</span>還有一個，品牌 X 的白色款，我們都會先跑一缸試布，<span class="hl">白度合格才放大貨</span>。</p>
-          <p><span class="t">14:30</span>如果趕交期想省一次清缸，你就要算，報廢一缸的錢比多花 40 分鐘多太多了。</p>
-        </div>
-      </div>
-      <div class="card">
-        <h3>🤖 AI 整理的經驗條目 <span class="tag amber">待師傅確認</span></h3>
-        <div class="field"><label>適用情境</label><div class="box">染色機由深色轉淺色（尤其轉白色）時的清缸作業</div></div>
-        <div class="field"><label>常見問題</label><div class="box">前缸染料殘留，造成淺色整缸污染報廢</div></div>
-        <div class="field"><label>做法</label><div class="box"><ol><li>深轉淺跑兩次清缸：第一次鹼劑 90℃ × 20 分鐘，第二次清水<span class="link-ts">▶05:40</span></li><li>每次清缸都要拆過濾網沖洗<span class="link-ts">▶08:05</span></li><li>品牌 X 白色款先跑試布，白度合格才放大貨<span class="link-ts">▶10:52</span></li></ol></div></div>
-        <div class="field"><label>注意事項</label><div class="box">不可為趕交期省略清缸，報廢一缸的損失遠大於多 40 分鐘工時<span class="link-ts">▶14:30</span></div></div>
-        <div class="field"><label>標籤</label><div class="box"><span class="tag">織布染整</span><span class="tag">台灣 A 廠</span><span class="tag">清缸</span><span class="tag">深轉淺</span><span class="tag">品牌 X</span></div></div>
-        <div style="display:flex;gap:8px;align-items:center;margin-top:6px">
-          <span class="btn red">✓ 確認入庫</span><span class="btn">✎ 修改</span><span class="btn">↩ 退回重整</span>
-          <span class="small muted" style="margin-left:auto">未經師傅確認，不會被「問師傅」引用</span>
-        </div>
-      </div>
-    </div>
-    <div class="anno" style="left:690px;top:66px">1</div>
-    <div class="anno" style="left:350px;top:226px">2</div>
-    <div class="anno" style="left:1060px;top:390px">3</div>
-    <div class="anno" style="left:868px;top:598px">4</div>
-  </section>
-
-  <!-- ============ UPLOAD ============ -->
-  <section class="screen" id="s-upload">
-    <h1>產銷雷達：本週資料上傳</h1>
-    <div class="sub">第 41 週｜越南 A 廠 × 品牌 X｜沿用原本的 Excel，不需要改格式</div>
-    <div class="files">
-      <div class="file"><div class="nm">📗 品牌X_FCST_W41.xlsx</div><div class="muted small">品牌預估・312 筆</div><span class="tag green">✓ 已自動對應</span></div>
-      <div class="file"><div class="nm">📗 訂單明細_VN-A.xlsx</div><div class="muted small">已下訂單・148 筆</div><span class="tag green">✓ 已自動對應</span></div>
-      <div class="file sel"><div class="nm">📗 布料交期_織染B廠.xlsx</div><div class="muted small">布料到料預估・64 筆</div><span class="tag amber">⚠ 1 欄待確認</span></div>
-      <div class="drop">⬆ 拖曳 Excel 到這裡<br><span class="small">產能表、輔料交期…</span></div>
-    </div>
-    <div class="row">
-      <div class="card" style="flex:1.6">
-        <h3>欄位對應：布料交期_織染B廠.xlsx</h3>
-        <table>
-          <tr><th>檔案裡的欄位</th><th>範例內容</th><th>對應到平台欄位</th><th>AI 把握度</th></tr>
-          <tr><td>PO#</td><td>FB-24117</td><td><span class="selbox">採購單號 ▾</span></td><td><span class="conf"><i style="width:98%"></i></span>98%</td></tr>
-          <tr><td>Style</td><td>XJ-2210</td><td><span class="selbox">款號 ▾</span></td><td><span class="conf"><i style="width:97%"></i></span>97%</td></tr>
-          <tr><td>Col.</td><td>NAVY 410</td><td><span class="selbox">顏色 ▾</span></td><td><span class="conf"><i style="width:93%"></i></span>93%</td></tr>
-          <tr><td>Yds</td><td>3,200</td><td><span class="selbox">數量（碼）▾</span></td><td><span class="conf"><i style="width:95%"></i></span>95%</td></tr>
-          <tr><td>ETA Wk</td><td>W44</td><td><span class="selbox warn">到料週 ／ 出貨週？▾</span></td><td><span class="conf low"><i style="width:61%"></i></span>61%</td></tr>
-          <tr><td>Remark</td><td>重染一缸</td><td><span class="selbox">備註（不參與計算）▾</span></td><td><span class="conf"><i style="width:90%"></i></span>90%</td></tr>
-        </table>
-        <div style="display:flex;gap:8px;margin-top:12px;align-items:center"><span class="btn pri">✓ 確認，並記住這個檔案格式</span><span class="small muted">下週同格式檔案會自動對應</span></div>
-      </div>
-      <div class="card" style="flex:1">
-        <h3>🔎 資料檢查</h3>
-        <div class="alert-sum">
-          <div class="it am">3 筆數量為 0，請確認是否取消</div>
-          <div class="it am">2 筆到料週早於下單週</div>
-          <div class="it">款號 XJ-2215 在訂單中找不到對應 FCST</div>
-        </div>
-        <div class="small muted" style="margin-top:6px">問題筆數可下載成 Excel，交給來源單位修正</div>
-        <div style="margin-top:14px"><span class="btn">⬇ 下載問題清單</span></div>
-      </div>
-    </div>
-    <div class="anno" style="left:30px;top:84px">1</div>
-    <div class="anno" style="left:1010px;top:84px">2</div>
-    <div class="anno" style="left:470px;top:452px">3</div>
-    <div class="anno" style="left:80px;top:560px">4</div>
-    <div class="anno" style="left:1110px;top:258px">5</div>
-  </section>
-
-  <!-- ============ RADAR ============ -->
-  <section class="screen" id="s-radar">
-    <h1>產銷雷達：未來 12 週看板</h1>
-    <div class="sub">越南 A 廠 × 品牌 X｜資料更新：2026/10/05 08:00（每週一自動更新）</div>
-    <div class="kpis">
-      <div class="kpi"><div class="v red">3 週</div><div class="l">負荷超過 100% 的週數</div></div>
-      <div class="kpi"><div class="v">2 週</div><div class="l">負荷低於 75% 的低峰週</div></div>
-      <div class="kpi"><div class="v red">5 張</div><div class="l">布料、輔料可能晚到的 PO</div></div>
-      <div class="kpi"><div class="v">4 款</div><div class="l">PP 樣尚未完成</div></div>
-    </div>
-    <div class="row">
-      <div class="card" style="flex:1.7">
-        <h3>12 週負荷熱度圖</h3>
-        <div class="heat">
-          <div class="h"></div><div class="h">W42</div><div class="h">W43</div><div class="h">W44</div><div class="h">W45</div><div class="h">W46</div><div class="h">W47</div><div class="h">W48</div><div class="h">W49</div><div class="h">W50</div><div class="h">W51</div><div class="h">W52</div><div class="h">W53</div>
-          <div class="rh">整體負荷</div><div class="c-g">88%</div><div class="c-g">92%</div><div class="c-y">99%</div><div class="c-r">112%</div><div class="c-r">118%</div><div class="c-r">109%</div><div class="c-y">97%</div><div class="c-g">85%</div><div class="c-l">72%</div><div class="c-l">68%</div><div class="c-g">80%</div><div class="c-g">84%</div>
-          <div class="rh">Sewing 車縫</div><div class="c-g">86%</div><div class="c-g">90%</div><div class="c-y">101%</div><div class="c-r">115%</div><div class="c-r">121%</div><div class="c-r">111%</div><div class="c-y">98%</div><div class="c-g">84%</div><div class="c-l">70%</div><div class="c-l">66%</div><div class="c-g">79%</div><div class="c-g">83%</div>
-          <div class="rh">Fabric 布料</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-y">1 PO</div><div class="c-r">3 PO</div><div class="c-y">1 PO</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div>
-          <div class="rh">Trims 輔料</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-y">2 PO</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div>
-          <div class="rh">PP Sample</div><div class="c-g">OK</div><div class="c-y">2 款</div><div class="c-y">2 款</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div><div class="c-g">OK</div>
-        </div>
-        <div class="legend"><span><i class="c-r"></i>超過產能／缺料</span><span><i class="c-y"></i>接近滿載／需注意</span><span><i class="c-g"></i>正常</span><span><i class="c-l"></i>低峰（可提前生產）</span></div>
-        <h3 style="margin-top:16px">需求工時 vs 產能（千小時）</h3>
-        <svg viewBox="0 0 760 170" width="100%" height="170" font-family="Microsoft JhengHei" font-size="12">
-          <line x1="40" y1="140" x2="750" y2="140" stroke="#C9D3DE"/>
-          <g fill="#7A9CC6">
-            <rect x="52" y="52" width="38" height="88"/><rect x="111" y="48" width="38" height="92"/><rect x="170" y="41" width="38" height="99"/>
-            <rect x="229" y="28" width="38" height="112" fill="#E07A5F"/><rect x="288" y="22" width="38" height="118" fill="#E07A5F"/><rect x="347" y="31" width="38" height="109" fill="#E07A5F"/>
-            <rect x="406" y="43" width="38" height="97"/><rect x="465" y="55" width="38" height="85"/><rect x="524" y="68" width="38" height="72" fill="#B8C7DA"/><rect x="583" y="72" width="38" height="68" fill="#B8C7DA"/><rect x="642" y="60" width="38" height="80"/><rect x="701" y="56" width="38" height="84"/>
-          </g>
-          <line x1="40" y1="40" x2="750" y2="40" stroke="#C0392B" stroke-width="2" stroke-dasharray="6 4"/>
-          <text x="600" y="34" fill="#C0392B">產能上限 100%</text>
-          <g fill="#62707F" text-anchor="middle"><text x="71" y="158">W42</text><text x="248" y="158">W45</text><text x="307" y="158">W46</text><text x="366" y="158">W47</text><text x="543" y="158">W50</text><text x="720" y="158">W53</text></g>
-        </svg>
-      </div>
-      <div class="card" style="flex:1">
-        <h3>🤖 本週預警摘要</h3>
-        <div class="alert-sum">
-          <div class="it"><b>第 45～47 週超載</b>（最高 118%）：品牌 X 秋冬補單集中，車縫缺口約 15%。</div>
-          <div class="it am"><b>布料風險</b>：織染 B 廠 3 張 PO 預計晚 1 週，影響 6 款（皆在第 45 週上線）。</div>
-          <div class="it am"><b>低峰機會</b>：第 50～51 週負荷僅 66～72%。</div>
-        </div>
-        <h3 style="margin-top:12px">建議討論事項</h3>
-        <div class="todo">
-          <div><span class="ck"></span>NAVY 410 等 4 個相同顏色小單合併生產（業務・生管）</div>
-          <div><span class="ck"></span>2 款基本款提前至第 50 週生產（生管）</div>
-          <div><span class="ck"></span>與織染 B 廠確認 3 張 PO 可否分批出貨（採購）</div>
-          <div><span class="ck"></span>評估第 46 週外發 1 條線（廠長）</div>
-        </div>
-        <div class="small muted" style="margin-top:8px">AI 只提供建議，由週會決定是否執行</div>
-      </div>
-    </div>
-    <div class="anno" style="left:30px;top:86px">1</div>
-    <div class="anno" style="left:300px;top:200px">2</div>
-    <div class="anno" style="left:490px;top:452px">3</div>
-    <div class="anno" style="left:1060px;top:200px">4</div>
-    <div class="anno" style="left:872px;top:420px">5</div>
-  </section>
-
-  <!-- ============ KPI ============ -->
-  <section class="screen" id="s-kpi">
-    <h1>成效看板（管理層）</h1>
-    <div class="sub">試點期間：2026/11 ～ 2027/04｜與第 1 月基準線比較</div>
-    <div class="kgrid">
-      <div class="kc"><div class="l">標準題庫正確率</div><div class="v">87%</div><div class="t">目標 ≥85% <span class="ok">達標</span></div></div>
-      <div class="kc"><div class="l">找到答案所需時間</div><div class="v">-58%</div><div class="t">目標 -50% <span class="ok">達標</span></div></div>
-      <div class="kc"><div class="l">試點人員每週使用率</div><div class="v">64%</div><div class="t">目標 ≥60% <span class="ok">達標</span></div></div>
-      <div class="kc"><div class="l">已入庫經驗條目</div><div class="v">212</div><div class="t">目標 ≥200 <span class="ok">達標</span></div></div>
-      <div class="kc"><div class="l">每週資料彙整工時</div><div class="v">-52%</div><div class="t">目標 -50% <span class="ok">達標</span></div></div>
-      <div class="kc"><div class="l">平均預警提前量</div><div class="v">5.2 週</div><div class="t">目標 ≥4 週 <span class="ok">達標</span></div></div>
-    </div>
-    <div class="row">
-      <div class="card" style="flex:1.1">
-        <h3>標準題庫正確率（每月重測 100 題）</h3>
-        <svg viewBox="0 0 520 220" width="100%" height="220" font-family="Microsoft JhengHei" font-size="12">
-          <line x1="40" y1="190" x2="500" y2="190" stroke="#C9D3DE"/>
-          <line x1="40" y1="58" x2="500" y2="58" stroke="#2E7D32" stroke-dasharray="6 4"/><text x="44" y="52" fill="#2E7D32">目標 85%</text>
-          <polyline points="80,140 180,118 280,91 380,64 470,51" fill="none" stroke="#1F3A5F" stroke-width="3"/>
-          <g fill="#1F3A5F"><circle cx="80" cy="140" r="5"/><circle cx="180" cy="118" r="5"/><circle cx="280" cy="91" r="5"/><circle cx="380" cy="64" r="5"/><circle cx="470" cy="51" r="5"/></g>
-          <g text-anchor="middle" fill="#1F3A5F" font-weight="700"><text x="80" y="128">68%</text><text x="180" y="106">74%</text><text x="280" y="79">81%</text><text x="380" y="52">85%</text><text x="470" y="40">87%</text></g>
-          <g text-anchor="middle" fill="#62707F"><text x="80" y="208">第2月</text><text x="180" y="208">第3月</text><text x="280" y="208">第4月</text><text x="380" y="208">第5月</text><text x="470" y="208">第6月</text></g>
-        </svg>
-      </div>
-      <div class="card" style="flex:1">
-        <h3>🕳 知識缺口（問了但查不到）</h3>
-        <table><tr><th>問題</th><th>次數</th><th>處理</th></tr>
-        <tr><td>品牌 Y 防潑水等級</td><td>14</td><td><span class="tag amber">訪談排定</span></td></tr>
-        <tr><td>回收尼龍染色條件</td><td>9</td><td><span class="tag amber">收集中</span></td></tr>
-        <tr><td>越南廠鍋爐水質標準</td><td>6</td><td><span class="tag">待指派</span></td></tr>
-        <tr><td>新助劑 SDS 文件</td><td>5</td><td><span class="tag green">已補齊</span></td></tr></table>
-      </div>
-      <div class="card" style="flex:0.9">
-        <h3>🏅 傳承貢獻排行</h3>
-        <table><tr><th>師傅</th><th>條目</th><th>被查閱</th></tr>
-        <tr><td>黃○○</td><td>34</td><td>612</td></tr>
-        <tr><td>李○○</td><td>28</td><td>540</td></tr>
-        <tr><td>張○○</td><td>21</td><td>377</td></tr>
-        <tr><td>吳○○</td><td>17</td><td>254</td></tr></table>
-      </div>
-    </div>
-    <div class="anno" style="left:178px;top:84px">1</div>
-    <div class="anno" style="left:310px;top:237px">2</div>
-    <div class="anno" style="left:680px;top:237px">3</div>
-    <div class="anno" style="left:1000px;top:237px">4</div>
-  </section>
-  </main>
-  <div class="demo-tag">示意畫面・資料皆為虛構</div>
-</div>
-
-<script>
-const screens=['home','ask','capture','upload','radar','kpi'];
-function go(id){
-  if(!screens.includes(id)) id='home';
-  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on',s.id==='s-'+id));
-  document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('on',n.dataset.go===id));
-  document.querySelectorAll('.toolbar [data-go]').forEach(n=>n.classList.toggle('on',n.dataset.go===id));
-  if(location.hash!=='#'+id) history.replaceState(null,'','#'+id);
-}
-document.addEventListener('click',e=>{const t=e.target.closest('[data-go]');if(t)go(t.dataset.go);});
-document.getElementById('annoBtn').onclick=function(){
-  document.body.classList.toggle('noanno');
-  const on=!document.body.classList.contains('noanno');
-  this.textContent='說明標記：'+(on?'開':'關');this.classList.toggle('on',on);
-};
-if(new URLSearchParams(location.search).has('shot')) document.body.classList.add('shot');
-go(location.hash.slice(1));
-window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
-</script>
+  </div>
+  <p class="note">所有畫面皆為示意，人名、數字與案例皆為虛構。</p>
+</main>
 </body>
 </html>

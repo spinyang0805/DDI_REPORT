@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>打樣快手 畫面草稿</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.grid2{display:grid;grid-template-columns:1fr 1.2fr;gap:16px}
+.sketch{height:250px;border-radius:10px;background:repeating-linear-gradient(45deg,#EEF2F7,#EEF2F7 10px,#E3E9F1 10px,#E3E9F1 20px);display:grid;place-items:center;color:var(--muted);font-size:14px;text-align:center}
+.field{margin-bottom:8px}
+.field label{display:block;font-size:12.5px;color:var(--muted)}
+.field .box{border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:14px;background:#FCFDFE}
+.field .box.miss{border-color:var(--amber);background:var(--amber-soft)}
+.sim{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.sim .card{padding:14px}
+.sw{height:70px;border-radius:8px;margin-bottom:8px}
+.score{font-size:24px;font-weight:700;color:var(--green)}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;font-size:13px}
+.lang span{padding:3px 10px}.lang span.on{background:var(--navy);color:#fff}
+.hbar{display:flex;align-items:center;gap:8px;font-size:13.5px;margin:6px 0}
+.hbar .b{flex:1;height:14px;background:#E3E8EE;border-radius:4px;position:relative;overflow:hidden}
+.hbar .b i{position:absolute;left:0;top:0;bottom:0;background:var(--navy)}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <b>方案 C「打樣快手」・畫面草稿</b>
+  <button data-go="intake">① Tech Pack 轉製單</button>
+  <button data-go="similar">② 相似款與參數推薦</button>
+  <button data-go="queue">③ 打樣排程與命中率</button>
+  <span class="sp"></span><a href="index.html" style="color:#fff">← 回方案總覽</a>
+</div>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><i>樣</i>打樣快手</div>
+    <div class="nav" data-go="intake"><span class="ic">📄</span>Tech Pack 轉製單</div>
+    <div class="nav" data-go="similar"><span class="ic">🧵</span>相似款與參數</div>
+    <div class="nav" data-go="queue"><span class="ic">📋</span>打樣排程與命中率<span class="cnt">5</span></div>
+    <div class="foot">方案 C 試點版<br>畫面為示意，資料皆為虛構</div>
+  </aside>
+  <header class="top">
+    <div class="search">🔍 搜尋款號、布種、色號、品牌…</div>
+    <span class="sp"></span>
+    <span class="pill">🌐 繁體中文 ▾</span>
+    <div class="user"><div class="avatar">謝</div>謝○○・研發中心</div>
+  </header>
+  <main class="main">
+
+  <section class="screen" id="s-intake">
+    <h1>Tech Pack 轉製單：上傳客戶資料，AI 產出製單初稿</h1>
+    <div class="sub">品牌 X｜FW27 Style XJ-3301｜Tech Pack 18 頁（PDF）＋BOM（Excel）</div>
+    <div class="grid2">
+      <div class="card">
+        <h3>📎 客戶原始資料</h3>
+        <div class="sketch">款式圖（Tech Pack 第 3 頁）<br>AI 已辨識：連帽外套、前中拉鍊、雙側袋</div>
+        <table style="margin-top:10px">
+          <tr><td>Tech Pack.pdf</td><td><span class="tag green">已讀取 18 頁</span></td></tr>
+          <tr><td>BOM.xlsx</td><td><span class="tag green">已讀取 32 項</span></td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>🤖 製單初稿 <span class="lang"><span class="on">中文</span><span>Tiếng Việt</span><span>English</span></span></h3>
+        <div class="field"><label>款式描述</label><div class="box">連帽外套，前中雙頭拉鍊，雙側斜插袋，下擺抽繩</div></div>
+        <div class="field"><label>主布</label><div class="box">尼龍 70D 平織＋PU 塗層｜NAVY 410</div></div>
+        <div class="field"><label>關鍵工序</label><div class="box">上帽（單針 ISO 301）→ 裝拉鍊 → 側袋貼合 → 下擺三針五線</div></div>
+        <div class="field"><label>尺寸表</label><div class="box">已帶入 S～XXL，共 24 個部位</div></div>
+        <div class="field"><label>缺少的資料</label><div class="box miss">⚠ 拉鍊規格未註明｜防潑水等級未註明</div></div>
+        <div style="display:flex;gap:8px;margin-top:8px"><span class="btn pri">送出確認</span><span class="btn">產出詢問客戶的 Email</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-similar">
+    <h1>相似款與成功參數推薦</h1>
+    <div class="sub">需求：尼龍 70D 平織｜NAVY 深色｜防潑水 4 級｜手感柔軟　→　找到 3 個過去成功的相似打樣</div>
+    <div class="sim">
+      <div class="card"><div class="sw" style="background:#22305A"></div><b>樣品 #S25-0417</b><div class="muted small">品牌 Y｜2025 秋冬｜一次成功</div><div class="score">相似度 92%</div><div class="small">染色：升溫 1℃/分，70℃ 保溫 10 分<br>後整：C6 撥水劑 40g/L，定型 170℃</div></div>
+      <div class="card"><div class="sw" style="background:#1F2A4A"></div><b>樣品 #S24-1102</b><div class="muted small">品牌 X｜2024 秋冬｜修 1 次</div><div class="score">相似度 87%</div><div class="small">染色：均染劑加量 0.5%<br>後整：撥水劑 35g/L，手感偏硬（客戶意見）</div></div>
+      <div class="card"><div class="sw" style="background:#2B3B66"></div><b>樣品 #S25-0233</b><div class="muted small">品牌 Z｜2025 春夏｜一次成功</div><div class="score">相似度 81%</div><div class="small">染色：分散劑改用 B 型<br>後整：柔軟劑 20g/L＋撥水 40g/L</div></div>
+    </div>
+    <div class="row" style="margin-top:16px">
+      <div class="card" style="flex:1.3">
+        <h3>🤖 建議起始參數</h3>
+        <div class="small">以 #S25-0417 為基礎，柔軟劑加入 #S25-0233 的 20g/L 配方，預估一次成功率 <b>82%</b>（過去同類平均 55%）</div>
+      </div>
+      <div class="card" style="flex:1">
+        <h3>⚠ 風險提示</h3>
+        <div class="alert-sum"><div class="it am">撥水劑 &gt; 40g/L 時，過去 3 次出現手感偏硬</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-queue">
+    <h1>打樣排程與命中率</h1>
+    <div class="sub">AI 依難易度、交期與命中機會排序，避免「先到先做」</div>
+    <div class="row">
+      <div class="card" style="flex:1.6">
+        <h3>本週打樣排程</h3>
+        <table>
+          <tr><th>優先</th><th>款號</th><th>品牌</th><th>難易度</th><th>轉大貨機會</th><th>交期</th></tr>
+          <tr><td>1</td><td>XJ-3301</td><td>X</td><td><span class="tag amber">中</span></td><td>高（68%）</td><td>10/12</td></tr>
+          <tr><td>2</td><td>YK-2207</td><td>Y</td><td><span class="tag red">高</span></td><td>高（61%）</td><td>10/14</td></tr>
+          <tr><td>3</td><td>ZP-1180</td><td>Z</td><td><span class="tag green">低</span></td><td>中（42%）</td><td>10/13</td></tr>
+          <tr><td>4</td><td>XJ-3315</td><td>X</td><td><span class="tag green">低</span></td><td>低（18%）</td><td>10/20</td></tr>
+        </table>
+        <div class="small muted" style="margin-top:8px">難易度低的款式建議由工廠端製單，分散台北開發人力</div>
+      </div>
+      <div class="card" style="flex:1">
+        <h3>各品牌打樣命中率（轉大貨）</h3>
+        <div class="hbar">品牌 X <div class="b"><i style="width:34%"></i></div>34%</div>
+        <div class="hbar">品牌 Y <div class="b"><i style="width:27%"></i></div>27%</div>
+        <div class="hbar">品牌 Z <div class="b"><i style="width:19%"></i></div>19%</div>
+        <div class="hbar">品牌 W <div class="b"><i style="width:12%"></i></div>12%</div>
+        <div class="small muted">命中率低的品牌，建議與業務確認打樣策略</div>
+      </div>
+    </div>
+  </section>
+  </main>
+  <div class="demo-tag">示意畫面・資料皆為虛構</div>
+</div>
+<script src="mock.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>主管 AI 工坊 畫面草稿</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.tracks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.track{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.track .lv{font-size:13px;color:#fff;background:var(--navy);display:inline-block;border-radius:4px;padding:1px 8px}
+.track h3{margin:8px 0 4px}
+.prop{display:grid;grid-template-columns:1.1fr 1fr;gap:16px}
+.q{margin-bottom:10px}
+.q label{display:block;font-size:12.5px;color:var(--muted);font-weight:700}
+.q .box{border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:14px;background:#FCFDFE}
+.chk div{padding:5px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.tool{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.tool .ic{font-size:26px}
+.tool b{display:block;margin:4px 0 2px;font-size:15.5px}
+.tool .meta{font-size:12.5px;color:var(--muted)}
+.tool .gain{font-size:14px;color:var(--green);font-weight:700;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <b>方案 D「主管 AI 工坊」・畫面草稿</b>
+  <button data-go="home">① 工坊首頁</button>
+  <button data-go="proposal">② 提案到原型</button>
+  <button data-go="gallery">③ 案例牆與擴散</button>
+  <span class="sp"></span><a href="index.html" style="color:#fff">← 回方案總覽</a>
+</div>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><i>坊</i>主管 AI 工坊</div>
+    <div class="nav" data-go="home"><span class="ic">⌂</span>工坊首頁</div>
+    <div class="nav" data-go="proposal"><span class="ic">💡</span>提案到原型</div>
+    <div class="nav" data-go="gallery"><span class="ic">🏆</span>案例牆與擴散</div>
+    <div class="foot">方案 D 試點版<br>畫面為示意，資料皆為虛構</div>
+  </aside>
+  <header class="top">
+    <div class="search">🔍 搜尋工具、案例、教學…</div>
+    <span class="sp"></span>
+    <span class="pill">第一梯次｜18 位主管</span>
+    <div class="user"><div class="avatar">毛</div>毛○○・織染業務</div>
+  </header>
+  <main class="main">
+
+  <section class="screen" id="s-home">
+    <div class="hero">
+      <h1>讓主管自己動手，用 AI 解決身邊的痛點</h1>
+      <div style="opacity:.85">第一梯次：成衣、織染、工纖、研發、數位整合 5 個部門｜18 位主管</div>
+    </div>
+    <div class="kgrid" style="grid-template-columns:repeat(4,1fr);margin-top:16px">
+      <div class="kc"><div class="l">已上線小工具</div><div class="v">12</div><div class="t">目標：半年 3～5 個部門各 1 個</div></div>
+      <div class="kc"><div class="l">每月節省工時</div><div class="v">326 小時</div><div class="t">依使用紀錄估算</div></div>
+      <div class="kc"><div class="l">主動申請加入</div><div class="v">41 人</div><div class="t">「必須學」→「想要學」</div></div>
+      <div class="kc"><div class="l">複製到其他廠</div><div class="v">4 次</div><div class="t">跨部門、跨產區擴散</div></div>
+    </div>
+    <div class="tracks">
+      <div class="track"><span class="lv">高階主管</span><h3>知道</h3><div class="small muted">2 小時：AI 能做什麼、怎麼評估提案、怎麼支持團隊</div></div>
+      <div class="track"><span class="lv">中階主管</span><h3>會用</h3><div class="small muted">4 次工作坊：把自己的痛點寫成提案，用 AI 做出可展示的原型</div></div>
+      <div class="track"><span class="lv">執行同仁</span><h3>親自做</h3><div class="small muted">陪跑 6 週：數位整合中心教練協助，完成上線與交接</div></div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-proposal">
+    <h1>提案到原型：出貨預估彙整小幫手</h1>
+    <div class="sub">提案人：成衣業務二處 林○○｜教練：數位整合中心 楊○○｜狀態：原型測試中</div>
+    <div class="prop">
+      <div class="card">
+        <h3>📝 提案卡（為何做、重要性、預期效益）</h3>
+        <div class="q"><label>痛點</label><div class="box">收單、船期、出貨資料要從 3 個系統匯出，再用 Excel 人工核對，每週約 6 小時</div></div>
+        <div class="q"><label>為什麼重要</label><div class="box">版本落差造成漏列與重複作業，曾影響客戶出貨預估</div></div>
+        <div class="q"><label>預期效益</label><div class="box">每週省 5 小時；資料錯誤降為 0；可複製到越南、印尼業務</div></div>
+        <div class="q"><label>AI 做出的原型</label><div class="box">上傳 3 份匯出檔 → 自動對應訂單與船期 → 產出待出貨清單與異常提示</div></div>
+      </div>
+      <div class="card">
+        <h3>🔒 上線前檢核</h3>
+        <div class="chk">
+          <div>✅ 不含客戶機密外傳（資料只在公司內部伺服器）</div>
+          <div>✅ 資安部門確認</div>
+          <div>✅ 沒有新增紙本或重複簽核（不疊床架屋）</div>
+          <div>⬜ 試用 2 週，記錄實際節省時間</div>
+          <div>⬜ 交接文件與第二位使用者</div>
+        </div>
+        <h3 style="margin-top:14px">試用回饋</h3>
+        <div class="alert-sum"><div class="it am">第 1 週：省 4.5 小時，船期欄位格式需再調整</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-gallery">
+    <h1>案例牆與擴散</h1>
+    <div class="sub">好用的工具可一鍵申請複製到其他部門；貢獻者得到積分與表揚，不額外加派工作</div>
+    <div class="gal">
+      <div class="tool"><div class="ic">📦</div><b>出貨預估彙整小幫手</b><div class="meta">成衣業務二處｜使用 14 人</div><div class="gain">每週省 5 小時</div><span class="btn" style="margin-top:8px">申請複製</span></div>
+      <div class="tool"><div class="ic">🎨</div><b>印繡花 S/O 追蹤</b><div class="meta">成衣業務一處｜使用 9 人</div><div class="gain">核對時間減 70%</div><span class="btn" style="margin-top:8px">申請複製</span></div>
+      <div class="tool"><div class="ic">🧶</div><b>紗批號挪用查詢</b><div class="meta">織染業務三處｜使用 11 人</div><div class="gain">盤點時間減 60%</div><span class="btn" style="margin-top:8px">申請複製</span></div>
+      <div class="tool"><div class="ic">🏭</div><b>工業絲庫存即時查詢</b><div class="meta">工業絲業務處｜使用 8 人</div><div class="gain">接單回覆由 1 天縮到 1 小時</div><span class="btn" style="margin-top:8px">申請複製</span></div>
+      <div class="tool"><div class="ic">🧪</div><b>展會樣品資料整理</b><div class="meta">創新研發中心｜使用 6 人</div><div class="gain">每場展會省 2 天</div><span class="btn" style="margin-top:8px">申請複製</span></div>
+      <div class="tool"><div class="ic">👷</div><b>越南排班建議</b><div class="meta">越南 A 廠｜試用中</div><div class="gain">評估中</div><span class="btn" style="margin-top:8px">追蹤進度</span></div>
+    </div>
+  </section>
+  </main>
+  <div class="demo-tag">示意畫面・資料皆為虛構</div>
+</div>
+<script src="mock.js"></script>
+</body>
+</html>

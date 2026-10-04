@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一單到底 畫面草稿</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin:8px 0 4px}
+.node{text-align:center;position:relative;padding-top:46px;font-size:14px}
+.node::before{content:attr(data-i);position:absolute;top:0;left:50%;transform:translateX(-50%);width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:700;z-index:2;background:var(--green)}
+.node::after{content:"";position:absolute;top:18px;left:-50%;width:100%;height:4px;background:var(--green);z-index:1}
+.node:first-child::after{display:none}
+.node.warn::before{background:var(--amber)} .node.late::before{background:var(--red)} .node.pend::before{background:#C9D3DE}
+.node.pend::after{background:#C9D3DE}
+.node b{display:block}
+.node .d{color:var(--muted);font-size:12.5px}
+.big{font-size:30px;font-weight:700;color:var(--navy)}
+.big.red{color:var(--red)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-row{display:flex;gap:10px;margin-bottom:10px}
+.form-row .f{flex:1}
+.form-row label{display:block;font-size:12.5px;color:var(--muted)}
+.form-row .box{border:1px solid var(--line);border-radius:6px;padding:7px 10px;background:#fff}
+.bar{height:10px;border-radius:5px;background:#E3E8EE;position:relative;overflow:hidden;margin-top:4px}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--navy)}
+.bar i.r{background:var(--red)} .bar i.a{background:var(--amber)} .bar i.g{background:var(--green)}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <b>方案 B「一單到底」・畫面草稿</b>
+  <button data-go="order">① 訂單全景</button>
+  <button data-go="atp">② 接單即時承諾</button>
+  <button data-go="board">③ 跨產區進度看板</button>
+  <span class="sp"></span><a href="index.html" style="color:#fff">← 回方案總覽</a>
+</div>
+<div class="app">
+  <aside class="side">
+    <div class="logo"><i>單</i>一單到底</div>
+    <div class="nav" data-go="order"><span class="ic">🔎</span>訂單全景</div>
+    <div class="nav" data-go="atp"><span class="ic">✅</span>接單即時承諾</div>
+    <div class="nav" data-go="board"><span class="ic">🗺</span>跨產區進度看板<span class="cnt">7</span></div>
+    <div class="foot">方案 B 試點版<br>畫面為示意，資料皆為虛構</div>
+  </aside>
+  <header class="top">
+    <div class="search">🔍 輸入 PO、款號、客戶、批號…</div>
+    <span class="sp"></span>
+    <span class="pill">🌐 繁體中文 ▾</span>
+    <div class="user"><div class="avatar">林</div>林○○・成衣業務</div>
+  </header>
+  <main class="main">
+
+  <section class="screen" id="s-order">
+    <h1>訂單全景：PO 24-1187｜品牌 X｜Style XJ-2210</h1>
+    <div class="sub">8,400 件｜客戶交期 2026/11/20｜資料來源：ERP、織染生管、越南 A 廠 MES、外發廠 Excel（今日 08:00 自動彙整）</div>
+    <div class="card">
+      <h3>從紗到出貨，一條線看完</h3>
+      <div class="flow">
+        <div class="node" data-i="✓"><b>紗線（工纖）</b><div class="d">10/02 已交</div></div>
+        <div class="node warn" data-i="!"><b>織布染整（台灣 B 廠）</b><div class="d">預計 10/24（原訂 10/20）</div></div>
+        <div class="node late" data-i="!"><b>裁剪車縫（越南 A 廠）</b><div class="d">預計 11/12 上線，晚 4 天</div></div>
+        <div class="node pend" data-i="4"><b>品檢・包裝</b><div class="d">預計 11/19</div></div>
+        <div class="node pend" data-i="5"><b>出貨</b><div class="d">預計 11/22</div></div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:16px">
+      <div class="card" style="flex:1">
+        <h3>交期判斷</h3>
+        <div class="muted small">客戶交期</div><div class="big">11/20</div>
+        <div class="muted small" style="margin-top:8px">AI 預估完成</div><div class="big red">11/22（晚 2 天）</div>
+        <div class="small" style="margin-top:8px">把握度 78%｜依過去 46 張同類訂單推估</div>
+      </div>
+      <div class="card" style="flex:1.4">
+        <h3>🤖 延遲原因與建議</h3>
+        <div class="alert-sum">
+          <div class="it">① 織染 B 廠第 2 缸色差回修，布料晚 4 天</div>
+          <div class="it am">② 越南 A 廠第 46 週車縫負荷 118%</div>
+        </div>
+        <div class="todo">
+          <div><span class="ck"></span>NAVY 色先出 60% 布料，車縫分兩批上線（生管）</div>
+          <div><span class="ck"></span>與客戶確認分批出貨：11/20 出 70%（業務）</div>
+        </div>
+      </div>
+      <div class="card" style="flex:1">
+        <h3>相關人員</h3>
+        <table>
+          <tr><td>織染生管</td><td>王○○</td></tr>
+          <tr><td>越南 A 廠 PMC</td><td>Nguyen ○○</td></tr>
+          <tr><td>品檢</td><td>陳○○</td></tr>
+        </table>
+        <div style="margin-top:10px"><span class="btn pri">一鍵通知全部</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-atp">
+    <h1>接單即時承諾：客戶詢單當下就能回覆</h1>
+    <div class="sub">整合各廠即時庫存、在製訂單與產能，業務不必再逐一詢問</div>
+    <div class="grid2">
+      <div class="card">
+        <h3>客戶詢單</h3>
+        <div class="form-row"><div class="f"><label>客戶</label><div class="box">汽車材料客戶 M</div></div><div class="f"><label>品項</label><div class="box">工業絲 1680D 高強</div></div></div>
+        <div class="form-row"><div class="f"><label>數量</label><div class="box">48 噸</div></div><div class="f"><label>希望交期</label><div class="box">2026/12/15</div></div></div>
+        <span class="btn pri">查詢可承諾量</span>
+        <h3 style="margin-top:18px">可用庫存（同規格、可挪用批號）</h3>
+        <table>
+          <tr><th>據點</th><th>批號</th><th>可用量</th><th>庫齡</th></tr>
+          <tr><td>台灣廠</td><td>L2609-03</td><td>12 噸</td><td>21 天</td></tr>
+          <tr><td>蘇州廠</td><td>S2608-11</td><td>9 噸</td><td>48 天</td></tr>
+          <tr><td>台灣廠</td><td>L2610-01</td><td>6 噸（已被訂單保留）</td><td>5 天</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>🤖 建議回覆</h3>
+        <div class="big">可承諾：48 噸，12/12 交貨</div>
+        <div class="small muted" style="margin:6px 0 12px">庫存 21 噸＋排產 27 噸（第 48～49 週產能空檔）</div>
+        <div class="muted small">產能使用（第 47～50 週）</div>
+        <div class="small">W47 <div class="bar"><i class="r" style="width:96%"></i></div></div>
+        <div class="small">W48 <div class="bar"><i class="g" style="width:71%"></i></div></div>
+        <div class="small">W49 <div class="bar"><i class="g" style="width:68%"></i></div></div>
+        <div class="small">W50 <div class="bar"><i class="a" style="width:88%"></i></div></div>
+        <div class="alert-sum" style="margin-top:12px">
+          <div class="it am">⚠ 會與 PO 26-0931 搶第 48 週產能，建議先與業務二課確認</div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:10px"><span class="btn red">保留產能 48 小時</span><span class="btn">產出回覆客戶草稿</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="s-board">
+    <h1>跨產區進度看板</h1>
+    <div class="sub">台灣・蘇州・越南・印尼・外發廠｜外發廠用原本的 Excel 回報，AI 自動彙整</div>
+    <div class="kpis">
+      <div class="kpi"><div class="v">312</div><div class="l">在製訂單</div></div>
+      <div class="kpi"><div class="v red">7</div><div class="l">預計延遲（＞2 天）</div></div>
+      <div class="kpi"><div class="v">94.1%</div><div class="l">本月準交率（OTP）</div></div>
+      <div class="kpi"><div class="v">3 家</div><div class="l">外發廠進度未回報</div></div>
+    </div>
+    <div class="row">
+      <div class="card" style="flex:1.5">
+        <h3>各產區準交狀況</h3>
+        <table>
+          <tr><th>產區</th><th>在製</th><th>準交率</th><th></th><th>延遲</th></tr>
+          <tr><td>台灣織染</td><td>86</td><td>96%</td><td style="width:35%"><div class="bar"><i class="g" style="width:96%"></i></div></td><td>1</td></tr>
+          <tr><td>蘇州</td><td>41</td><td>95%</td><td><div class="bar"><i class="g" style="width:95%"></i></div></td><td>1</td></tr>
+          <tr><td>越南成衣</td><td>118</td><td>92%</td><td><div class="bar"><i class="a" style="width:92%"></i></div></td><td>3</td></tr>
+          <tr><td>印尼成衣</td><td>52</td><td>94%</td><td><div class="bar"><i class="g" style="width:94%"></i></div></td><td>1</td></tr>
+          <tr><td>外發廠（5 家）</td><td>15</td><td>87%</td><td><div class="bar"><i class="r" style="width:87%"></i></div></td><td>1</td></tr>
+        </table>
+      </div>
+      <div class="card" style="flex:1">
+        <h3>🔴 需要關注的訂單</h3>
+        <div class="alert-sum">
+          <div class="it">PO 24-1187｜越南 A 廠｜晚 2 天｜布料回修</div>
+          <div class="it">PO 24-1203｜外發 K 廠｜晚 5 天｜印花未完成</div>
+          <div class="it am">PO 24-1150｜印尼｜晚 2 天｜輔料到貨晚</div>
+        </div>
+        <div class="small muted">每天 08:00 自動寄送給業務與生管</div>
+      </div>
+    </div>
+  </section>
+  </main>
+  <div class="demo-tag">示意畫面・資料皆為虛構</div>
+</div>
+<script src="mock.js"></script>
+</body>
+</html>
