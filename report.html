@@ -198,7 +198,14 @@ table.mx td:last-child{border-radius:0 10px 10px 0;color:var(--muted)}
 .navbtn{position:fixed;top:50%;transform:translateY(-50%);width:46px;height:90px;border:0;background:transparent;color:#5d7591;font-size:40px;cursor:pointer;z-index:9;opacity:.35}
 .navbtn:hover{opacity:1}
 #prev{left:4px}#next{right:4px}
-@media print{#notes,#help,.navbtn{display:none}}
+/* 講稿鈕只在觸控手機／平板顯示；電腦用 N 鍵 */
+#notesBtn{display:none}
+@media (hover:none) and (pointer:coarse){#notesBtn{display:block}}
+#notesBtn{position:fixed;right:14px;bottom:14px;z-index:12;border:1px solid var(--accent);background:rgba(13,27,42,.9);color:var(--accent);
+  font:inherit;font-size:15px;font-weight:700;border-radius:999px;padding:8px 16px;cursor:pointer;opacity:.75}
+#notesBtn:hover,#notesBtn.on{opacity:1;background:var(--accent);color:#0d1b2a}
+@media (max-width:900px){#notes{font-size:16px;line-height:1.7;padding:14px 18px 20px;max-height:50vh}.navbtn{display:none}#help{display:none}}
+@media print{#notesBtn,#notes,#help,.navbtn{display:none}}
 </style>
 </head>
 <body>
@@ -409,6 +416,7 @@ table.mx td:last-child{border-radius:0 10px 10px 0;color:var(--muted)}
 
 <button class="navbtn" id="prev" aria-label="上一頁">‹</button>
 <button class="navbtn" id="next" aria-label="下一頁">›</button>
+<button id="notesBtn" aria-label="顯示講稿">講稿</button>
 <div id="notes"><h4>演講敘事</h4><div id="notesText"></div></div>
 <div id="help">← → 換頁　N 講稿　F 全螢幕　調研頁 1–4 切換角度・畫面頁 1–3 切換畫面</div>
 
@@ -550,6 +558,7 @@ function go(i){
   $('progress').style.width=((cur+1)/slides.length*100)+'%';
   $('pageno').textContent=(cur+1)+' / '+slides.length;
   $('notesText').textContent=s.dataset.notes||'';
+  if($('notes').classList.contains('on'))$('notesBtn').style.bottom=($('notes').offsetHeight+12)+'px';
   if(s.id==='survey')setTimeout(()=>renderChart(view,true),500);
   if(s.id==='kpi')countUp();
   if(s.id==='pick')renderScores();
@@ -561,12 +570,21 @@ addEventListener('keydown',e=>{
   if(['ArrowRight','PageDown',' ','Enter'].includes(k)){e.preventDefault();go(cur+1)}
   else if(['ArrowLeft','PageUp','Backspace'].includes(k)){e.preventDefault();go(cur-1)}
   else if(k==='Home')go(0);else if(k==='End')go(slides.length-1);
-  else if(k==='n'||k==='N')$('notes').classList.toggle('on');
+  else if(k==='n'||k==='N')toggleNotes();
   else if(k==='f'||k==='F'){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{})}
   else if(slides[cur].id==='survey'&&'1234'.includes(k)&&k.length===1)renderChart(['raw','title','unit','both'][+k-1]);
   else if(slides[cur].id==='screens'&&'123'.includes(k)&&k.length===1)showShot(+k-1);
 });
 $('prev').onclick=()=>go(cur-1);$('next').onclick=()=>go(cur+1);
+// 講稿按鈕（手機用）
+function toggleNotes(){const on=$('notes').classList.toggle('on');$('notesBtn').classList.toggle('on',on);
+  $('notesBtn').textContent=on?'收起講稿':'講稿';$('notesBtn').style.bottom=on?($('notes').offsetHeight+12)+'px':''}
+$('notesBtn').onclick=toggleNotes;
+// 觸控滑動換頁（在講稿面板內滑動不換頁）
+let tx=null,ty=null;
+addEventListener('touchstart',e=>{if(e.target.closest('#notes'))return;tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;tx=null;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur+(dx<0?1:-1))},{passive:true});
 setTimeout(()=>{$('help').style.opacity=0},6000);
 const start=parseInt(location.hash.slice(1),10);
 go(Number.isFinite(start)?start-1:0);
